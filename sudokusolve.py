@@ -55,3 +55,27 @@ def valid(bo, num, pos):
                 return False
 
     return True
+
+def solve(bo):
+    #base case of recursion
+    find = find_empty(bo)
+    if not find:
+        return True
+    else:
+        row, col = find
+    
+    #recursion
+    for i in range(1,10):
+        if valid(bo, i, (row, col)):
+            bo[row][col] = i
+
+            if solve(bo):
+                return True
+
+            bo[row][col] = 0
+
+    return False
+
+solve(board)
+print("\nsolved board\n")
+print_board(board)
